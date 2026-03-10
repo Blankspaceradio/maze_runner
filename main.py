@@ -1,24 +1,17 @@
 from mazes import *
-
+from rooms import *
 
 def main():
     finished = False
-    maze = {0:["Left", "Right", "Forward"]}
+    maze = {0:[{"Left": 0}, {"Right": 0}, {"Forward": 0}]}
     room_id = 0
     next_step = False
     while next_step == False:
-        print("ENTRANCE:")
-        for item in maze[0]:
-            print(item)
-        print("Which direction do you go?")
-        users_choice = input()
+        print("ENTRANCE")
+        show_room(maze[0])
+        users_choice = input().capitalize()
         print()
-        if users_choice not in maze[0]:
-            print("You can't go that way.")
-            print()
-            next_step = False
-        else:
-            next_step = True
+        next_step = go_to_next_room(maze, room_id, users_choice)
 
 
     while finished == False:
@@ -28,45 +21,24 @@ def main():
             room_id += 1
             maze[room_id] = room
             while next_step == False:
-                print(f"ROOM {room_id}:")
-                for choice in room:
-                    if len(room) == 1:
-                        print("Dead End.")
-                        print(choice)
-                    else:
-                        print(choice)
-                print("Which direction do you go?")
-                users_choice = input()
+                print(f"ROOM {room_id}")
+                show_room(room)
+                users_choice = input().capitalize()
                 print()
-                if users_choice not in maze[room_id]:
-                    print("You can't go that way.")
-                    print()
-                    next_step = False
-                else:
-                    next_step = True
+                next_step = go_to_next_room(maze, room_id, users_choice)
+                
         else:
             room_id -= 1
             pervious_room = maze[room_id]
             while next_step == False:
                 if room_id == 0:
-                    print("ENTRANCE:")
+                    print("ENTRANCE")
                 else:
                     print(f"ROOM {room_id}:")
-                for choice in pervious_room:
-                    if len(room) == 1:
-                        print("Dead End.")
-                        print(choice)
-                    else:
-                        print(choice)
-                print("Which direction do you go?")
-                users_choice = input()
+                show_room(pervious_room)
+                users_choice = input().capitalize()
                 print()
-                if users_choice not in maze[room_id]:
-                    print("You can't go that way.")
-                    print()
-                    next_step = False
-                else:
-                    next_step = True
+                next_step = go_to_next_room(maze, room_id, users_choice)
 
 
 if __name__ == "__main__":
