@@ -3,7 +3,7 @@ from rooms import *
 
 def main():
     finished = False
-    maze = {0:[{"Left": 0}, {"Right": 0}, {"Forward": 0}]}
+    maze = {0:{"Left": None, "Right": None, "Forward": None}}
     room_id = 0
     next_step = False
     while next_step == False:
