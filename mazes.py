@@ -1,5 +1,5 @@
 import random
-
+from items import *
 
 
 
@@ -34,6 +34,11 @@ def new_room(maze, room_id, users_choice):
         new_room = len(maze)
         maze[new_room] = generate_maze()
         connect(maze, room_id, users_choice, new_room)
+        if random.random() < 0.8:
+            generate_item()
+        else:
+            print("")
+            print("No items found")
     return new_room
 
 

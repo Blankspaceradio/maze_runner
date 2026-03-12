@@ -1,5 +1,6 @@
 from mazes import *
 from rooms import *
+from items import *
 
 def main():
     finished = False
@@ -10,9 +11,14 @@ def main():
         show_map(maze, current_room)
         show_room(maze[current_room])
         direction = input().capitalize()
-
+        if direction == "F":
+            break
+        if direction == "I":
+            display_inventory()
         if direction not in maze[current_room]:
-            print("You can't go that way")
+            print("")
+            if direction != "I":
+                print("You can't go that way")
             continue
         if maze[current_room][direction] is None:
             new_room_id = new_room(maze, current_room, direction)
